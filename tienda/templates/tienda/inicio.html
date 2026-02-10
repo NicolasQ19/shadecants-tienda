@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Shadecants | Alta Gama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <nav class="bg-white shadow-sm py-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-thin tracking-[0.3em] uppercase text-black">Shadecants</h1>
+            <p class="text-xs text-gray-400 mt-2 tracking-widest">PERFUMERÍA DE NICHO & DECANTS</p>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-12">
+        <h2 class="text-2xl font-light mb-10 text-center border-b pb-4">Nuestra Colección</h2>
+        
+        {% if not perfumes %}
+            <div class="text-center py-20 bg-white rounded-lg shadow">
+                <p class="text-gray-500 text-xl">Aún no hay perfumes cargados en el sistema.</p>
+                <a href="/admin" class="text-blue-500 underline mt-4 block">Ir al Admin a cargar uno</a>
+            </div>
+        {% else %}
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                {% for perfume in perfumes %}
+                <div class="bg-white group cursor-pointer hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1">
+                    
+                    <div class="relative overflow-hidden h-80 bg-gray-100 flex items-center justify-center">
+                        {% if perfume.imagen %}
+                            <img src="{{ perfume.imagen.url }}" alt="{{ perfume.nombre }}" class="h-full w-full object-cover group-hover:scale-110 transition duration-700">
+                        {% else %}
+                            <span class="text-gray-400">Sin Imagen</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="p-6 text-center">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">{{ perfume.marca.nombre }}</h3>
+                        <h2 class="text-xl font-medium text-gray-900 mb-4">{{ perfume.nombre }}</h2>
+                        
+                        <a href="{% url 'detalle' perfume.id %}" class="block w-full text-center border border-black text-black py-3 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition duration-300">
+                            Ver Decants
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

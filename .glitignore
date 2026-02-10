@@ -1,0 +1,14 @@
+# Archivos de Python que no sirven
+__pycache__/
+*.pyc
+
+# Tu entorno virtual (muy pesado, no se sube)
+venv/
+env/
+
+# Base de datos (No se sube por seguridad y peso)
+db.sqlite3
+*.sqlite3
+
+# Archivos de medios (las fotos que subiste)
+media/
